@@ -5,7 +5,7 @@
     <title>모범음식점 위치 제공</title>
     <style>
         .map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-        .map_wrap {position:relative;width:100%;height:350px;}
+        .map_wrap {position:relative;width:100%;height:100%;}
         #category {position:absolute;top:10px;left:10px;border-radius: 5px; border:1px solid #909090;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
         #category li {float:left;list-style: none;width:50px;px;border-right:1px solid #acacac;padding:6px 0;text-align: center; cursor: pointer;}
         #category li.on {background: #eee;}
@@ -64,10 +64,9 @@
         </div>
 </head>
 <body>
-<div id=cjmsg style="width=100%;
-height=50px;"></div>
+<div id=cjmsg style="width:100%; height:50px;"></div>
 
-<div id="map" style="width:100%;height:800px;"></div>
+<div id="map" style="width:100%; height:800px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=67a589352d74d9eab5add0814ae00d17"></script>
 <script>
@@ -91,8 +90,8 @@ if (navigator.geolocation) {
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
     navigator.geolocation.getCurrentPosition(function(position) {
         
-        //var lat = position.coords.latitude, // 위도
-        //    lon = position.coords.longitude; // 경도
+        var lat = position.coords.latitude, // 위도
+            lon = position.coords.longitude; // 경도
         //cjmsg.innerHTML = "현재 위치의 위도: " + lat + "와 경도: " + lon;
 
         var locPosition = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
@@ -295,7 +294,7 @@ function onClickCategory() {
         changeCategoryClass(this);
         searchPlaces();
     }
-}
+}  
 
 // 클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
 function changeCategoryClass(el) {
