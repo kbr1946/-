@@ -57,25 +57,6 @@
                 var g_name = [];
                 var g_location = [];
 
-                var count2_h = 0,
-                    count2_j = 0,
-                    count2_c = 0,
-                    count2_m = 0,
-                    count2_f = 0,
-                    count2_g = 0;
-                var h2_name = [];
-                var h2_location = [];
-                var j2_name = [];
-                var j2_location = [];
-                var c2_name = [];
-                var c2_location = [];
-                var m2_name = [];
-                var m2_location = [];
-                var f2_name = [];
-                var f2_location = [];
-                var g2_name = [];
-                var g2_location = [];
-
                 for (var i = 0; i < obj_value.length; i++) {
                     if (obj_value[i].메뉴 == "한식") {
                         h_name[count_h] = obj_value[i].업소명;
@@ -107,29 +88,29 @@
 
                 for (var i = 0; i < obj_value1.length; i++) {
                     if (obj_value1[i].메뉴 == "한식") {
-                        h2_name[count2_h] = obj_value1[i].업소명;
-                        h2_location[count2_h] = obj_value1[i].소재지;
-                        count2_h++;
+                        h_name[count_h] = obj_value1[i].업소명;
+                        h_location[count_h] = obj_value1[i].소재지;
+                        count_h++;
                     } else if (obj_value1[i].메뉴 == "일식") {
-                        j2_name[count2_j] = obj_value1[i].업소명;
-                        j2_location[count2_j] = obj_value1[i].소재지;
-                        count2_j++;
+                        j_name[count_j] = obj_value1[i].업소명;
+                        j_location[count_j] = obj_value1[i].소재지;
+                        count_j++;
                     } else if (obj_value1[i].메뉴 == "중국식") {
-                        c2_name[count2_c] = obj_value1[i].업소명;
-                        c2_location[count2_c] = obj_value1[i].소재지;
-                        count2_c++;
+                        c_name[count_c] = obj_value1[i].업소명;
+                        c_location[count_c] = obj_value1[i].소재지;
+                        count_c++;
                     } else if (obj_value1[i].메뉴 == "식육(숯불구이)") {
-                        m2_name[count2_m] = obj_value1[i].업소명;
-                        m2_location[count2_m] = obj_value1[i].소재지;
-                        count2_m++;
+                        m_name[count_m] = obj_value1[i].업소명;
+                        m_location[count_m] = obj_value1[i].소재지;
+                        count_m++;
                     } else if (obj_value1[i].메뉴 == "횟집") {
-                        f2_name[count2_f] = obj_value1[i].업소명;
-                        f2_location[count2_f] = obj_value1[i].소재지;
-                        count2_f++;
+                        f_name[count_f] = obj_value1[i].업소명;
+                        f_location[count_f] = obj_value1[i].소재지;
+                        count_f++;
                     } else {
-                        g2_name[count2_g] = obj_value1[i].업소명;
-                        g2_location[count2_g] = obj_value1[i].소재지;
-                        count2_g++;
+                        g_name[count_g] = obj_value1[i].업소명;
+                        g_location[count_g] = obj_value1[i].소재지;
+                        count_g++;
                     }
 
                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -333,143 +314,9 @@
                         }
                     })
                 };
-             //   console.log("ok");
-
-             // 한식
-             for (var i = 0; i < h2_name.length; i++) {
-                    var imageSize = new kakao.maps.Size(24, 35);
-                    var markerImage1 = new kakao.maps.MarkerImage(K_imageSrc, imageSize);
-
-                    // 주소로 좌표를 검색
-                    geocoder.addressSearch(h2_location[i], function(result, status) {
-
-                        // 정상적으로 검색이 완료됐으면 
-                        if (status === daum.maps.services.Status.OK) {
-
-                            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-                            // 결과값으로 받은 위치를 마커로 표시
-                            var marker = new daum.maps.Marker({
-                                map: map,
-                                position: coords,
-                                image: markerImage1
-                            });
-
-
-                        }
-                    })
-                };
-
-                // 일식
-                for (var i = 0; i < j2_name.length; i++) {
-
-                    var imageSize = new kakao.maps.Size(24, 35);
-                    var markerImage2 = new kakao.maps.MarkerImage(J_imageSrc, imageSize);
-
-                    geocoder.addressSearch(j2_location[i], function(result, status) {
-
-                        if (status === daum.maps.services.Status.OK) {
-
-                            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-                            var marker = new daum.maps.Marker({
-                                map: map,
-                                position: coords,
-                                image: markerImage2
-                            });
-
-
-                        }
-                    })
-                };
-
-                // 중식
-                for (var i = 0; i < c2_name.length; i++) {
-                    var imageSize = new kakao.maps.Size(24, 35);
-                    var markerImage3 = new kakao.maps.MarkerImage(C_imageSrc, imageSize);
-
-                    geocoder.addressSearch(c2_location[i], function(result, status) {
-
-                        if (status === daum.maps.services.Status.OK) {
-
-                            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-                            var marker = new daum.maps.Marker({
-                                map: map,
-                                position: coords,
-                                image: markerImage3
-                            });
-
-
-                        }
-                    })
-                };
-
-                // 고기
-                for (var i = 0; i < m2_name.length; i++) {
-                    var imageSize = new kakao.maps.Size(24, 35);
-                    var markerImage4 = new kakao.maps.MarkerImage(M_imageSrc, imageSize);
-
-                    geocoder.addressSearch(m2_location[i], function(result, status) {
-
-                        if (status === daum.maps.services.Status.OK) {
-
-                            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-                            var marker = new daum.maps.Marker({
-                                map: map,
-                                position: coords,
-                                image: markerImage4
-                            });
-
-                        }
-                    })
-                };
-
-                // 횟집
-                for (var i = 0; i < f2_name.length; i++) {
-                    var imageSize = new kakao.maps.Size(24, 35);
-                    var markerImage5 = new kakao.maps.MarkerImage(F_imageSrc, imageSize);
-
-                    geocoder.addressSearch(f2_location[i], function(result, status) {
-
-                        if (status === daum.maps.services.Status.OK) {
-
-                            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-                            var marker = new daum.maps.Marker({
-                                map: map,
-                                position: coords,
-                                image: markerImage5
-                            });
-
-
-                        }
-                    })
-                };
-
-                //기타
-                for (var i = 0; i < g2_name.length; i++) {
-                    var imageSize = new kakao.maps.Size(24, 35);
-                    var markerImage6 = new kakao.maps.MarkerImage(G_imageSrc, imageSize);
-
-                    geocoder.addressSearch(g2_location[i], function(result, status) {
-
-                        if (status === daum.maps.services.Status.OK) {
-
-                            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-                            var marker = new daum.maps.Marker({
-                                map: map,
-                                position: coords,
-                                image: markerImage6
-                            });
-                        }
-                    })
-                };
             }});
-            </script>
+
+    </script>
 </body>
 
 </html>
-
