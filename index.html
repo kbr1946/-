@@ -31,10 +31,10 @@
         .then(res => {return Promise.all(res.map(ress => { return ress.json();
         }));
     }).then(json => {
-        console.log(json);
+       // console.log(json);
         var obj_key = Object.keys(json);
         var obj_value = json[0]['data'];
-        console.log(Object.keys(obj_value[0]));
+       // console.log(Object.keys(obj_value[0]));
 
                 var count_h = 0,
                     count_j = 0,
