@@ -1,41 +1,31 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>모범식당에서 밥먹으라게~</title>
 </head>
-
 <body>
     <h1 align="center">🍴모범식당에서 밥먹으라게~🍜</h1>
     <div id="map" align="center" style="width:100%;height:500px;"></div>
     <br>
     <table border="1" width="400" height="70" align="center">
-        <th align="center" bgcolor="Crimson"><button>한식</button></th>
-        <th align="center" bgcolor="Orange"><button>일식</button></th>
-        <th align="center" bgcolor="Khaki"><button>중식</button></th>
-        <th align="center" bgcolor="LightPink"><button>고기</button></th>
-        <th align="center" bgcolor="SeaGreen"><button>회</button></th>
-        <th align="center" bgcolor="DimGray"><button>기타</button></th>
+        <th align="center" bgcolor="Crimson">한식</th>
+        <th align="center" bgcolor="Orange">일식</th>
+        <th align="center" bgcolor="Khaki">중식</th>
+        <th align="center" bgcolor="LightPink">고기</th>
+        <th align="center" bgcolor="SeaGreen">회</th>
+        <th align="center" bgcolor="DimGray">기타</th>
     </table>
     <h4 align="center">2022 오픈소스개발방법론</h4>
     <h5 align="center">🌴NAITE 팀 - 김벼리, 김다현, 양현주🌴</h5>
-    
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bbcc5f79226c4971080843e36b9fab33&libraries=services"></script>
     <script>
         const url = "https://api.odcloud.kr/api/15055981/v1/uddi:6d218756-7258-42b6-9ab6-d3f07effeb0d?page=1&perPage=240&serviceKey=VfxwJOiRK4Lubg%2BzpSfUrSZpPCdgWPxRzvzRQyBH76dJsrXQ8xmYY1xae3ObsrVrmsWNO7twRmauyRcM0yqY%2Fg%3D%3D";
-        const url2 = "https://api.odcloud.kr/api/15055977/v1/uddi:68ada80e-1d06-4a5e-8389-9178ca18d0b1?page=1&perPage=183&serviceKey=VfxwJOiRK4Lubg%2BzpSfUrSZpPCdgWPxRzvzRQyBH76dJsrXQ8xmYY1xae3ObsrVrmsWNO7twRmauyRcM0yqY%2Fg%3D%3D";
-        Promise.all([fetch(url), fetch(url2)])
-        .then(res => {return Promise.all(res.map(ress => { return ress.json();
-        }));
-    }).then(json => {
-       // console.log(json);
-        var obj_key = Object.keys(json);
-        var obj_value = json[0]['data'];
-        var obj_value1 = json[1]['data'];
-       // console.log(Object.keys(obj_value[0]));
+        fetch(url)
+            .then((res) => res.json())
+            .then((myJson) => {
+                var obj_key = Object.keys(myJson);
+                var obj_value = myJson['data'];
 
                 var count_h = 0,
                     count_j = 0,
@@ -84,34 +74,6 @@
                         count_g++;
                     }
                 }
-    
-
-                for (var i = 0; i < obj_value1.length; i++) {
-                    if (obj_value1[i].메뉴 == "한식") {
-                        h_name[count_h] = obj_value1[i].업소명;
-                        h_location[count_h] = obj_value1[i].소재지;
-                        count_h++;
-                    } else if (obj_value1[i].메뉴 == "일식") {
-                        j_name[count_j] = obj_value1[i].업소명;
-                        j_location[count_j] = obj_value1[i].소재지;
-                        count_j++;
-                    } else if (obj_value1[i].메뉴 == "중국식") {
-                        c_name[count_c] = obj_value1[i].업소명;
-                        c_location[count_c] = obj_value1[i].소재지;
-                        count_c++;
-                    } else if (obj_value1[i].메뉴 == "식육(숯불구이)") {
-                        m_name[count_m] = obj_value1[i].업소명;
-                        m_location[count_m] = obj_value1[i].소재지;
-                        count_m++;
-                    } else if (obj_value1[i].메뉴 == "횟집") {
-                        f_name[count_f] = obj_value1[i].업소명;
-                        f_location[count_f] = obj_value1[i].소재지;
-                        count_f++;
-                    } else {
-                        g_name[count_g] = obj_value1[i].업소명;
-                        g_location[count_g] = obj_value1[i].소재지;
-                        count_g++;
-                    }
 
                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                     mapOption = {
@@ -175,14 +137,12 @@
                 var geocoder = new daum.maps.services.Geocoder();
 
                 // 이미지 파일
-                var K_imageSrc = "images/red.png"; // 한식
-                var J_imageSrc = "images/orange.png"; // 일식
-                var C_imageSrc = "images/yellow.png"; // 중식
-                var M_imageSrc = "images/pink.png"; // 고기
-                var F_imageSrc = "images/green.png"; // 회
-                var G_imageSrc = "images/black.png"; // 기타
-                    
-                console.log("ok");
+                var K_imageSrc = "red.png"; // 한식
+                var J_imageSrc = "orange.png"; // 일식
+                var C_imageSrc = "yellow.png"; // 중식
+                var M_imageSrc = "pink.png"; // 고기
+                var F_imageSrc = "green.png"; // 회
+                var G_imageSrc = "black.png"; // 기타
 
                 // 한식
                 for (var i = 0; i < h_name.length; i++) {
@@ -208,7 +168,7 @@
                         }
                     })
                 };
-/*
+
                 // 일식
                 for (var i = 0; i < j_name.length; i++) {
 
@@ -281,7 +241,7 @@
                     var markerImage5 = new kakao.maps.MarkerImage(F_imageSrc, imageSize);
 
                     geocoder.addressSearch(f_location[i], function(result, status) {
-
+ 
                         if (status === daum.maps.services.Status.OK) {
 
                             var coords = new daum.maps.LatLng(result[0].y, result[0].x);
@@ -315,10 +275,9 @@
                             });
                         }
                     })
-                };*/
-            }});
+                };
 
+            });
     </script>
 </body>
-
 </html>
